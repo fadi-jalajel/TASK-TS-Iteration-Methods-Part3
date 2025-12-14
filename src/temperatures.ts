@@ -17,7 +17,7 @@ const temperatures = [
 function filterHighTemperatures(temps: number[]): number[] {
   // Your code here
 
-  return []; // replace the empty array with what you see is fit
+  return temps.filter((temp) => temp >= 25);
 }
 
 /**
@@ -30,7 +30,7 @@ function filterHighTemperatures(temps: number[]): number[] {
 function filterLowTemperatures(temps: number[]): number[] {
   // Your code here
 
-  return []; // replace the empty array with what you see is fit
+  return temps.filter((temp) => temp < 20);
 }
 
 /**
@@ -44,7 +44,7 @@ function filterLowTemperatures(temps: number[]): number[] {
 function convertCelsiusToFahrenheit(temps: number[]): number[] {
   // Your code here
 
-  return []; // replace the empty array with what you see is fit
+  return temps.map((temp) => (temp * 9 /5) + 32);
 }
 
 /**
@@ -61,8 +61,18 @@ type TemperatureLabel = "Warm" | "Mild" | "Cool";
 
 function labelTemperatures(temps: number[]): TemperatureLabel[] {
   // Your code here
+  const tempLabel : TemperatureLabel[] = [];
 
-  return []; // replace the empty array with what you see is fit
+   temps.forEach((temp) => {
+    if(temp >= 25){
+      tempLabel.push("Warm");
+    } else if(temp >= 20 && temp < 25){
+      tempLabel.push("Mild");
+    } else if(temp < 20){
+      tempLabel.push("Cool");
+    }
+  })
+  return tempLabel;
 }
 
 /**
@@ -75,7 +85,11 @@ function labelTemperatures(temps: number[]): TemperatureLabel[] {
 function getMaxTemperature(temps: number[]): number {
   // Your code here
 
-  return -1; // replace -1 with what you see is fit
+  const max = temps.reduce((currentMax, num) => {
+    return num > currentMax ? num : currentMax;
+  }, temps[0]);
+  
+  return max;
 }
 
 /**
@@ -87,8 +101,10 @@ function getMaxTemperature(temps: number[]): number {
  */
 function getMinTemperature(temps: number[]): number {
   // Your code here
-
-  return -1; // replace -1 with what you see is fit
+  const min = temps.reduce((currentMin, num) => {
+    return num < currentMin ? num : currentMin;
+  }, temps[0]);
+  return min;
 }
 
 export {
@@ -99,3 +115,4 @@ export {
   getMaxTemperature,
   getMinTemperature,
 };
+ 
